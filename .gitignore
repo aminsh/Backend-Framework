@@ -1,4 +1,16 @@
 packages
 *.xml
 *.dll
+*.pdb
+*.cache
 /bin
+
+[Dd]ebug/
+[Rr]elease/
+x64/
+build/
+[Bb]in/
+[Oo]bj/
+
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
