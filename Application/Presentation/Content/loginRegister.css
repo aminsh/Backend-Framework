@@ -1,0 +1,743 @@
+﻿
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
+    margin:0;
+    padding:0;
+    font-family: "Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+html,body {
+    margin:0;
+    padding:0;
+    height: 100%;
+    background: url('../images/bg-login.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+fieldset,img {
+    border:0;
+}
+address,caption,cite,code,dfn,th,var {
+    font-style:normal;
+    font-weight:normal;
+}
+ol,ul {
+    list-style:none;
+}
+caption,th {
+    text-align:left;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-size:100%;
+    font-weight:normal;
+}
+q:before,q:after {
+    content:'';
+}
+abbr,acronym { border:0;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+
+
+/** fonts used for the icons **/
+@font-face {
+	font-family: 'FontAwesome';
+	src: url('../fonts/fontawesome-webfont.eot?v=4.2.0');
+	src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.2.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff?v=4.2.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.2.0') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.2.0#fontawesomeregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+
+}
+@font-face {
+	font-family: 'Glyphicons Halflings';
+	src: url(../fonts/glyphicons-halflings-regular.eot);
+	src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+	url('../fonts/glyphicons-halflings-regular.woff') format('woff'),
+	url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+	url('../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+
+	font-weight: normal;
+	font-style: normal;
+}
+a.hiddenanchor{
+	display: none;
+}
+/** The wrapper that will contain our two forms **/
+#wrapper-login{
+	width: 60%;
+	right: 0px;
+	min-height: 560px;
+	margin: 0px auto;
+	width: 500px;
+	position: relative;
+}
+/**** Styling the form elements **/
+
+/**** general text styling ****/
+#wrapper-login a{
+	color: rgb(95, 155, 198);
+	text-decoration: underline;
+}
+
+#wrapper-login h1{
+	font-size: 38px;
+	color: rgb(6, 106, 117);
+	padding: 2px 0 10px 0;
+	font-weight: bold;
+	text-align: center;
+	padding-bottom: 30px;
+}
+/** For the moment only webkit supports the background-clip:text; */
+#wrapper-login h1{
+	background: -webkit-repeating-linear-gradient(-45deg,
+	rgb(18, 83, 93) ,
+	rgb(18, 83, 93) 20px,
+	rgb(64, 111, 118) 20px,
+	rgb(64, 111, 118) 40px,
+	rgb(18, 83, 93) 40px);
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+}
+#wrapper-login h1:after{
+	content: ' ';
+	display: block;
+	width: 100%;
+	height: 2px;
+	margin-top: 10px;
+	background: -moz-linear-gradient(left, rgba(147,184,189,0) 0%, rgba(147,184,189,0.8) 20%, rgba(147,184,189,1) 53%, rgba(147,184,189,0.8) 79%, rgba(147,184,189,0) 100%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(147,184,189,0)), color-stop(20%,rgba(147,184,189,0.8)), color-stop(53%,rgba(147,184,189,1)), color-stop(79%,rgba(147,184,189,0.8)), color-stop(100%,rgba(147,184,189,0)));
+	background: -webkit-linear-gradient(left, rgba(147,184,189,0) 0%,rgba(147,184,189,0.8) 20%,rgba(147,184,189,1) 53%,rgba(147,184,189,0.8) 79%,rgba(147,184,189,0) 100%);
+	background: -o-linear-gradient(left, rgba(147,184,189,0) 0%,rgba(147,184,189,0.8) 20%,rgba(147,184,189,1) 53%,rgba(147,184,189,0.8) 79%,rgba(147,184,189,0) 100%);
+	background: -ms-linear-gradient(left, rgba(147,184,189,0) 0%,rgba(147,184,189,0.8) 20%,rgba(147,184,189,1) 53%,rgba(147,184,189,0.8) 79%,rgba(147,184,189,0) 100%);
+	background: linear-gradient(left, rgba(147,184,189,0) 0%,rgba(147,184,189,0.8) 20%,rgba(147,184,189,1) 53%,rgba(147,184,189,0.8) 79%,rgba(147,184,189,0) 100%);
+}
+
+#wrapper-login p{
+	margin-bottom:15px;
+}
+#wrapper-login p:first-child{
+	margin: 0px;
+}
+#wrapper-login label{
+	
+	position: relative;
+	float: right;
+    font-size:14px;
+}
+
+/**** advanced input styling ****/
+/* placeholder */
+::-webkit-input-placeholder  {
+	color: rgb(190, 188, 188);
+	font-style: italic;
+}
+input:-moz-placeholder,
+textarea:-moz-placeholder{
+	color: rgb(190, 188, 188);
+	font-style: italic;
+}
+input {
+	outline: none;
+}
+
+/* all the input except submit and checkbox */
+input[type=checkbox] {
+	display: none;
+}
+.checkbox
+{
+	    text-align: right;
+    margin-top: 10px;
+    font-size: 15px;
+    color: #287bbc;
+    font-weight: bold;
+    margin-right: 20px;
+}
+.checkbox label:before {
+	content: "";
+	display: inline-block;
+
+	width: 16px;
+	height: 16px;
+
+	margin-right: -20px;
+	position: absolute;
+	right: 0;
+	bottom: 1px;
+	background-color: #ffffff;
+	box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+	border: 1px solid #278bbc;
+}
+.checkbox label {
+	margin-bottom: 10px;
+	color: #287bbc;
+}
+.checkbox label:before {
+	border-radius: 3px;
+}
+
+
+input[type=checkbox]:checked + label:before {
+	content: "\2713";
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+	font-size: 15px;
+	color: #278bbc;
+	text-align: center;
+	line-height: 15px;
+}
+
+#wrapper-login input:not([type="checkbox"]){
+	width: 92%;
+	margin-top: 4px;
+	padding: 10px 5px 10px 32px;
+	border: 1px solid rgb(178, 178, 178);
+	-webkit-appearance: textfield;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing : content-box;
+	box-sizing : content-box;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+
+}
+#wrapper-login input:not([type="checkbox"]):active,
+#wrapper-login input:not([type="checkbox"]):focus{
+	border: 1px solid #287bbc;
+	background: rgba(238, 236, 240, 0.2);
+
+}
+span.k-widget.k-combobox.k-header
+{
+    width:100%;
+    font-size:13px;
+        border: 0;
+    background-color: transparent;
+    
+}
+span.k-widget.k-combobox.k-header input
+{
+    height:inherit;
+    line-height:1.5em;
+}
+span.k-widget.k-combobox.k-header:hover
+{
+    border:0;
+}
+span.k-dropdown-wrap.k-state-default
+{
+    padding-left:2.9em;
+}
+.info-register{
+	text-align: right;
+	line-height: 25px;
+	direction: rtl;
+    font-size:13px;
+}
+.info-register li:after
+{
+	font-family: 'Glyphicons Halflings';
+	color: rgb(40, 123, 188);
+	content: "\e013";
+	float: right;
+	padding-left: 10px;
+}
+.register-checked
+{
+	width: 100%;
+	text-align: right;
+	color: #287BBC;
+	font-size: 15px;
+	font-weight: bold;
+	margin-top: 5px;
+}
+.register-checked input
+{
+	float: right;
+	margin-left: 10px;
+	margin-top: 3px;
+}
+.personel-name
+{
+	text-align: right;
+}
+input.personel-name
+{
+	text-align: right;
+}
+.validation-error
+{
+	background-color: #FBECEC;
+	padding: 10px 30px;
+}
+.validation-error h2
+{
+	text-align: right;
+	color: #287bbc;
+	margin-right: -25px;
+	padding-bottom: 10px;
+}
+.validation-error h2:after
+{
+	font-family: 'Glyphicons Halflings';
+	content: "\e209";
+	color: red;
+	text-align: right;
+	direction: rtl;
+	margin-left: 10px;
+}
+.validation-error ul
+{
+	background-color: transparent;
+	color: red;
+	text-align: right;
+	line-height: 20px;
+	font-size: 12px;
+	list-style-type: square;
+	direction: rtl;
+}
+.validation-error ul li:after
+{
+	content: '';
+}
+/** the magic icon trick ! **/
+[data-icon]:after {
+	content: attr(data-icon);
+	font-family: 'FontAwesome';
+	color: rgb(40, 123, 188);
+	position: absolute;
+	right: 400px;
+	top: 35px;
+	width: 30px;
+}
+
+/*styling both submit buttons */
+#wrapper-login p.button input{
+	width: 95%;
+	cursor: pointer;
+	padding: 8px 5px;
+	color: #fff;
+	font-size: 22px;
+	background-color: #287bbc;
+	border-color: #1b5480;
+	margin-bottom: 10px;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
+	0px 0px 0px 3px rgb(254, 254, 254),
+	0px 5px 3px 3px rgb(210, 210, 210);
+	-moz-box-shadow:0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
+	0px 0px 0px 3px rgb(254, 254, 254),
+	0px 5px 3px 3px rgb(210, 210, 210);
+	box-shadow:0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
+	0px 0px 0px 3px rgb(254, 254, 254),
+	0px 5px 3px 3px rgb(210, 210, 210);
+	-webkit-transition: all 0.2s linear;
+	-moz-transition: all 0.2s linear;
+	-o-transition: all 0.2s linear;
+	transition: all 0.2s linear;
+}
+#wrapper-login p.button input:hover{
+	background: rgb(74, 179, 198);
+}
+#wrapper-login p.button input:active,
+#wrapper-login p.button input:focus{
+	background: rgb(40, 137, 154);
+	position: relative;
+	top: 1px;
+	border: 1px solid rgb(12, 76, 87);
+	-webkit-box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.2) inset;
+	-moz-box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.2) inset;
+	box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.2) inset;
+}
+p.login.button,
+p.signin.button{
+	text-align: right;
+	margin: 5px 0;
+}
+
+
+/* styling the checkbox "keep me logged in"*/
+.keeplogin{
+	margin-top: -5px;
+}
+.keeplogin input,
+.keeplogin label{
+	display: inline-block;
+	font-size: 12px;
+	font-style: italic;
+}
+.keeplogin input#loginkeeping{
+	margin-right: 5px;
+}
+.keeplogin label{
+	width: 80%;
+}
+
+/*---- animation-------*/
+   /*---- fadeOutLeft---*/
+@-webkit-keyframes fadeOutLeft {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateX(0);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: translateX(-20px);
+    }
+}
+
+@-moz-keyframes fadeOutLeft {
+    0% {
+        opacity: 1;
+        -moz-transform: translateX(0);
+    }
+
+    100% {
+        opacity: 0;
+        -moz-transform: translateX(-20px);
+    }
+}
+
+@-ms-keyframes fadeOutLeft {
+    0% {
+        opacity: 1;
+        -ms-transform: translateX(0);
+    }
+
+    100% {
+        opacity: 0;
+        -ms-transform: translateX(-20px);
+    }
+}
+
+@-o-keyframes fadeOutLeft {
+    0% {
+        opacity: 1;
+        -o-transform: translateX(0);
+    }
+
+    100% {
+        opacity: 0;
+        -o-transform: translateX(-20px);
+    }
+}
+
+@keyframes fadeOutLeft {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+}
+
+.fadeOutLeft {
+    -webkit-animation-name: fadeOutLeft;
+    -moz-animation-name: fadeOutLeft;
+    -ms-animation-name: fadeOutLeft;
+    -o-animation-name: fadeOutLeft;
+    animation-name: fadeOutLeft;
+}
+
+/*----- fadeinleft-----*/
+@-webkit-keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translateX(0);
+    }
+}
+
+@-moz-keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        -moz-transform: translateX(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        -moz-transform: translateX(0);
+    }
+}
+
+@-ms-keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        -ms-transform: translateX(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        -ms-transform: translateX(0);
+    }
+}
+
+@-o-keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        -o-transform: translateX(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        -o-transform: translateX(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fadeInLeft {
+    -webkit-animation-name: fadeInLeft;
+    -moz-animation-name: fadeInLeft;
+    -ms-animation-name: fadeInLeft;
+    -o-animation-name: fadeInLeft;
+    animation-name: fadeInLeft;
+}
+
+
+
+
+
+/*styling the links to change from one form to another */
+
+p.change_link{
+	position: absolute;
+	color: #000000;
+	left: 0px;
+	height: 20px;
+	width: 440px;
+	padding: 17px 30px 20px 30px;
+	font-size: 16px    ;
+	text-align: right;
+	border-top: 1px solid rgb(219, 229, 232);
+	-webkit-border-radius: 0 0  5px 5px;
+	-moz-border-radius: 0 0  5px 5px;
+	border-radius: 0 0  5px 5px;
+	background: rgb(225, 234, 235);
+	background: -moz-repeating-linear-gradient(-45deg,
+	rgb(247, 247, 247) ,
+	rgb(247, 247, 247) 15px,
+	rgb(225, 234, 235) 15px,
+	rgb(225, 234, 235) 30px,
+	rgb(247, 247, 247) 30px
+	);
+	background: -webkit-repeating-linear-gradient(-45deg,
+	rgb(247, 247, 247) ,
+	rgb(247, 247, 247) 15px,
+	rgb(225, 234, 235) 15px,
+	rgb(225, 234, 235) 30px,
+	rgb(247, 247, 247) 30px
+	);
+	background: -o-repeating-linear-gradient(-45deg,
+	rgb(247, 247, 247) ,
+	rgb(247, 247, 247) 15px,
+	rgb(225, 234, 235) 15px,
+	rgb(225, 234, 235) 30px,
+	rgb(247, 247, 247) 30px
+	);
+	background: repeating-linear-gradient(-45deg,
+	rgb(247, 247, 247) ,
+	rgb(247, 247, 247) 15px,
+	rgb(225, 234, 235) 15px,
+	rgb(225, 234, 235) 30px,
+	rgb(247, 247, 247) 30px
+	);
+}
+#wrapper-login p.change_link a {
+	display: inline-block;
+	font-weight: bold;
+	background: #287BBC;
+	padding: 6px 30px;
+	color: rgb(239, 252, 255);
+	margin-left: 10px;
+	text-decoration: none;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	border: 1px solid rgb(203, 213, 214);
+	-webkit-transition: all 0.4s linear;
+	-moz-transition: all 0.4s  linear;
+	-o-transition: all 0.4s linear;
+	-ms-transition: all 0.4s  linear;
+	transition: all 0.4s  linear;
+    font-size:14px;
+}
+#wrapper-login p.change_link a:hover {
+
+	background:#4AB3C6;
+	border: 1px solid #333333;
+}
+#wrapper-login p.change_link a:active{
+	position: relative;
+	top: 1px;
+}
+/** Styling both forms **/
+#register,
+#login{
+	position: absolute;
+
+	width: 88%;
+	padding: 18px 6% 60px 6%;
+	margin: 0 0 35px 0;
+	background: rgb(247, 247, 247);
+	border: 1px solid rgba(147, 184, 189,0.8);
+	-webkit-box-shadow: 0pt 2px 5px rgba(105, 108, 109,  0.7), 0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+	-moz-box-shadow: 0pt 2px 5px rgba(105, 108, 109,  0.7), 0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+	box-shadow: 0pt 2px 5px rgba(105, 108, 109,  0.7), 0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+	-webkit-box-shadow: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+#register{
+	z-index: 21;
+	opacity: 0;
+	top: 40px;
+}
+#register h1{
+    font-size:20px;
+    padding-bottom:10px;
+}
+#register p
+{
+    margin-bottom:10px;
+}
+#login{
+	z-index: 22;
+	top:120px;
+}
+#toregister:target ~ #wrapper-login #register
+{
+	opacity: 1;
+	z-index: 22;
+	-webkit-animation-name: fadeInLeft;
+	-moz-animation-name: fadeInLeft;
+	-ms-animation-name: fadeInLeft;
+	-o-animation-name: fadeInLeft;
+	animation-name: fadeInLeft;
+	-webkit-animation-delay: .1s;
+	-moz-animation-delay: .1s;
+	-o-animation-delay: .1s;
+	-ms-animation-delay: .1s;
+	animation-delay: .1s;
+}
+#tologin:target ~ #wrapper-login #login
+{
+	z-index: 22;
+	-webkit-animation-name: fadeInLeft;
+	-moz-animation-name: fadeInLeft;
+	-ms-animation-name: fadeInLeft;
+	-o-animation-name: fadeInLeft;
+	animation-name: fadeInLeft;
+	-webkit-animation-delay: .1s;
+	-moz-animation-delay: .1s;
+	-o-animation-delay: .1s;
+	-ms-animation-delay: .1s;
+	animation-delay: .1s;
+}
+#toregister:target ~ #wrapper-login #login
+{
+	opacity: 1;
+	-webkit-animation-name: fadeOutLeft;
+	-moz-animation-name: fadeOutLeft;
+	-ms-animation-name: fadeOutLeft;
+	-o-animation-name: fadeOutLeft;
+	animation-name: fadeOutLeft;
+}
+#tologin:target ~ #wrapper-login #register{
+	-webkit-animation-name: fadeOutLeft;
+	-moz-animation-name: fadeOutLeft;
+	-ms-animation-name: fadeOutLeft;
+	-o-animation-name: fadeOutLeft;
+	animation-name: fadeOutLeft;
+}
+
+/** the actual animation, credit where due ***/
+.animate{
+	-webkit-animation-duration: 0.5s;
+	-webkit-animation-timing-function: ease;
+	-webkit-animation-fill-mode: both;
+
+	-moz-animation-duration: 0.5s;
+	-moz-animation-timing-function: ease;
+	-moz-animation-fill-mode: both;
+
+	-o-animation-duration: 0.5s;
+	-o-animation-timing-function: ease;
+	-o-animation-fill-mode: both;
+
+	-ms-animation-duration: 0.5s;
+	-ms-animation-timing-function: ease;
+	-ms-animation-fill-mode: both;
+
+	animation-duration: 0.5s;
+	animation-timing-function: ease;
+	animation-fill-mode: both;
+}
+
+/** yerk some ugly IE fixes 'cause I know someone will ask "why does it look ugly in IE?", no matter how many warnings I will put in the article */
+
+.lt8 #wrapper-login input{
+	padding: 10px 5px 10px 32px;
+	width: 92%;
+}
+.lt8 #wrapper-login input[type=checkbox]{
+	width: 10px;
+	padding: 0;
+}
+.lt8 #wrapper-login h1{
+	color: #066A75;
+}
+.lt8 #register{
+	display: none;
+}
+.lt8 p.change_link,
+.ie9 p.change_link{
+	position: absolute;
+	height: 90px;
+	background: transparent;
+}
+.text-lable
+{
+	width: 100%;
+	text-align: right;
+}
+
+@media screen and (max-width:500px)
+{
+    #wrapper-login
+    {
+        width:96%;
+    }
+    p.change_link
+    {
+        width:83%;
+    }
+}

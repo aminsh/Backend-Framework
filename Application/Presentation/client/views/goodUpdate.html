@@ -1,0 +1,62 @@
+<ctag-content title="{{title}}">
+    <form name="form">
+        <a class="btn btn-success" ng-click="save(form)" ng-disabled="form.$invalid">
+            <i class="glyphicon glyphicon-floppy-disk"></i>
+            {{'SAVE' | translate}}
+        </a>
+
+        <div class="row" style="padding: 5px">
+            <div class="alert alert-danger" role="alert" ng-if="errors.length">
+                <strong>لطفا خطاها را اصلاح کنید</strong>
+                <ul ng-repeat="err in good.errors">
+                    <li>{{err}}</li>
+                </ul>
+            </div>
+
+
+            <div class="col-md-6">
+
+                <div class="form-group" ng-class="{ 'has-error' : form.code.$invalid && !form.code.$pristine }">
+                    <label class="control-label" >{{'CODE' | translate}}</label>
+                    <div>
+                        <input type="text" class="form-control" required ng-model="good.code" name="code"/>
+                    </div>
+                    <p ng-show="form.code.$invalid && !form.code.$pristine">
+                        <span class="label label-danger">{{'CODE IS REQUIRED' | translate}}</span>
+                    </p>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error' : form.title.$invalid && !form.title.$pristine }">
+                    <label class="control-label" >{{'TITLE' | translate}}</label>
+                    <div>
+                        <input type="text" class="form-control" required ng-model="good.title" name="title"/>
+                    </div>
+                    <p ng-show="form.title.$invalid && !form.title.$pristine">
+                        <span class="label label-danger">{{'TITLE IS REQUIRED' | translate}}</span>
+                    </p>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error' : form.scaleId.$invalid && !form.scaleId.$pristine }">
+                    <label class="control-label">{{'SCALE' | translate}}</label>
+                    <div>
+                        <ctag-combo url="/api/scales" valueprop="id" displayprop="title" placeholder="واحد اندازه گیری را وارد کنید ..."
+                                    model="good.scaleId" name="scaleId" width="400px" required></ctag-combo>
+                    </div>
+                    <p ng-show="form.scaleId.$invalid && !form.scaleId.$pristine">
+                        <span class="label label-danger">{{'SCALE IS REQUIRED' | translate}}</span>
+                    </p>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error' : form.technicalDes.$invalid && !form.technicalDes.$pristine }">
+                    <label class="control-label" >{{'TECHNICALDES' | translate}}</label>
+                    <div>
+                        <input type="text" class="form-control" ng-model="good.technicalDes"/>
+                    </div>
+                    <p ng-show="form.technicalDes.$invalid && !form.technicalDes.$pristine">
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </form>
+</ctag-content>

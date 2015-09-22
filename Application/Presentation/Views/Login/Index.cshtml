@@ -1,0 +1,36 @@
+﻿@model Presentation.Controllers.UserLogin
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Login user</title>
+    </head>
+    <body>
+        <div class="container">
+            <section>
+                <div id="login" class="animate form">
+                    @using (Html.BeginForm("Index", "Login", FormMethod.Post, new {autocomplete = "on"}))
+                    {
+                        <h1>ورود به سیستم</h1>
+                        <p>
+                            @{
+                                var userAttrs = new Dictionary<string, object> {{"@class", "youpasswd"}, {"data-icon", ""}};
+                            }
+                            @Html.LabelFor(m => m.UserName, userAttrs)
+                            @Html.TextBoxFor(m => m.UserName, new {placeholder = "User name", id = "username"})
+                        </p>
+                        <p>
+                            @{
+                                var passAttrs = new Dictionary<string, object> {{"@class", "youpasswd"}, {"data-icon", ""}};
+                            }
+                            
+                            @Html.LabelFor(m=>m.Password, passAttrs)
+                            @Html.PasswordFor(m=>m.Password, passAttrs)
+                        </p>
+                    }
+                </div>
+            </section>
+        </div>
+    </body>
+</html>

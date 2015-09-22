@@ -1,0 +1,30 @@
+<ctag-content title="{{title}}">
+    <form name="form">
+        <a class="btn btn-success" ng-click="save(form)" ng-disabled="form.$invalid">
+            <i class="glyphicon glyphicon-floppy-disk"></i>
+            {{'SAVE' | translate}}
+        </a>
+
+        <div class="row" style="padding: 5px">
+            <div class="alert alert-danger" role="alert" ng-if="errors.length">
+                <strong>لطفا خطاها را اصلاح کنید</strong>
+                <ul ng-repeat="err in errors">
+                    <li>{{err}}</li>
+                </ul>
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="form-group" ng-class="{ 'has-error' : form.title.$invalid && !form.title.$pristine }">
+                    <label class="control-label" >{{'TITLE' | translate}}</label>
+                    <div>
+                        <input type="text" class="form-control" required ng-model="employee.title" name="title"/>
+                    </div>
+                    <p ng-show="form.title.$invalid && !form.title.$pristine">
+                        <span class="label label-danger">{{'TITLE IS REQUIRED' | translate}}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </form>
+</ctag-content>

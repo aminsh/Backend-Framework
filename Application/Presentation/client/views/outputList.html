@@ -1,0 +1,12 @@
+<ctag-content title="{{'OUTPUT LIST'| translate}}">
+    <a class="btn btn-primary" href="#/output/create">
+        <i class="glyphicon glyphicon-plus"></i>
+        {{'NEW' | translate}}
+    </a>
+
+    <ctag-grid readurl="/api/outputs"
+               columns="columns"
+               commands="commands"
+               option="girdOption">
+    </ctag-grid>
+</ctag-content>

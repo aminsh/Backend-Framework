@@ -1,0 +1,12 @@
+<ctag-content title="{{'INPUT LIST'| translate}}">
+    <a class="btn btn-primary" href="#/input/create">
+        <i class="glyphicon glyphicon-plus"></i>
+        {{'NEW' | translate}}
+    </a>
+
+    <ctag-grid readurl="/api/inputs"
+               columns="columns"
+               commands="commands"
+               option="girdOption">
+    </ctag-grid>
+</ctag-content>

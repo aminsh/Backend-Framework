@@ -1,0 +1,143 @@
+﻿
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>title</title>
+        <link href="~/Content/loginRegister.css" rel="stylesheet" />
+        <link href="/client/content/kendo/kendo.common.min.css" rel="stylesheet" />
+        <link href="/client/content/kendo/kendo.material.min.css" rel="stylesheet" />
+        <link href="/client/content/kendo/kendo.rtl.min.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div>
+            <div class="container">
+                <!-- Codrops top bar -->
+
+
+                <section>
+                    <div id="container_demo">
+                        <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
+                        <a class="hiddenanchor" id="toregister"></a>
+                        <a class="hiddenanchor" id="tologin"></a>
+                        <div id="wrapper-login">
+                            <div id="login" class="animate form">
+                                @Html.Partial("_Login")
+                            </div>
+
+                                <div id="register" class="animate form">
+                                    @Html.Partial("_RegisterByEmployee")
+                                    @Html.Partial("_RegisterByName")
+                                </div>
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+
+        
+        <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+        <script src="~/Scripts/kendo.all.min.js"></script>
+        <script>
+            $(function() {
+                $('#employeeCombo').kendoComboBox({
+                    placeholder: "نام خود را جستجو کنید",
+                    dataTextField: "title",
+                    dataValueField: "id",
+                    filter: "contains",
+                    autoBind: false,
+                    minLength: 2,
+                    dataSource: {
+                        type: "json",
+                        serverFiltering: true,
+                        transport: {
+                            read: {
+                                url: "/api/employees"
+                            },
+                            parameterMap: function(options) {
+                                return kendo.stringify(options);
+                            }
+                        },
+                        schema: {
+                            parse: function(response) {
+                                return response.data;
+                            }
+                        }
+                    },
+                    select: function(e) {
+                        var dataItem = this.dataItem(e.item.index());
+                        $('#EmployeeId').val(dataItem.id);
+                    }
+                });
+            });
+
+            function submit_register(e) {
+                e.preventDefault();
+
+                var validation = $('#register_errors');
+                validation.html('');
+                $('.validation-error').hide();
+                var frm = $(this);
+                $.post(frm.attr('action'), frm.serialize())
+                    .then(function(result) {
+                        if (result.success) {
+                            window.location = "/Account";
+                            return;
+                        }
+
+                        $('.validation-error').show();
+                        $.each(result.errors, function(i, item) {
+                            $.each(item.errors, function(i, item) {
+                                validation.append('<li>' + item + '</li>');
+                            });
+                        });
+                    });
+            }
+            $('#form_registerByName').submit(submit_register);
+            $('#form_registerByEmployee').submit(submit_register);
+
+            $('#form_login').submit(function(e) {
+                e.preventDefault();
+
+                var validation = $('#login_errors');
+                validation.html('');
+
+                var frm = $(this);
+
+                $.post(frm.attr('action'), frm.serialize())
+                    .then(function(result) {
+                        if (result.success) {
+                            window.location = "/";
+                            return;
+                        }
+
+                        $('.validation-error').show();
+                        $.each(result.errors, function(i, item) {
+                            $.each(item.errors, function(i, item) {
+                                validation.append('<li>' + item + '</li>');
+                            });
+                        });
+                    });
+            });
+
+            $('#form_registerByEmployee').show();
+            $('#form_registerByName').hide();
+
+            $('#changeToRegisterByName').click(function() {
+                $('#form_registerByName').show();
+                $('#form_registerByEmployee').hide();
+            });
+
+            $('#changeToRegisterByEmployee').click(function () {
+                $('#form_registerByEmployee').show();
+                $('#form_registerByName').hide();
+            });
+        </script>
+    </body>
+
+    
+
+</html>

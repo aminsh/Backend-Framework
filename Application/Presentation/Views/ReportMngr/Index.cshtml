@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@using Stimulsoft.Report.Mvc;
+@using System.Web.UI.WebControls;
+@using Stimulsoft.Base;
+@using Stimulsoft.Report.Mvc;
+
+<!DOCTYPE html>
+<html>
+<body>
+    <div>
+        @Html.Stimulsoft().RenderMvcViewerScripts()
+        @Html.Stimulsoft().StiMvcViewer("mywiew", new StiMvcViewerOptions()
+            {
+                ActionGetReportSnapshot = "GetReportSnapshot",
+                ActionViewerEvent = "ActionViewerEvent",
+                ActionPrintReport = "PrintReport",
+
+                ActionExportReport = "ExportReport",
+                Width = Unit.Percentage(100),
+                Height = Unit.Pixel(800),
+                Theme = StiTheme.Office2013
+            }
+            )
+    </div>
+
+</body>
+</html>
+
+

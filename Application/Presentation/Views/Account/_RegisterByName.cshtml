@@ -1,0 +1,43 @@
+﻿@model Presentation.Controllers.UserRegisterByName
+           
+@using (Html.BeginForm("RegisterByName", "Account", FormMethod.Post, new { autocomplete = "on", id = "form_registerByName" }))
+{
+    <h1> ثبت نام </h1>
+
+    <ul class="info-register">
+        <li>نام و نام خانوادگی با توجه به سیستم ‍برسنلی می باشد</li>
+        <li>نام کاربری را حتما از حروف لاتین استفاده کنید</li>
+    </ul>
+
+    <p class="personel-name">
+        <label for="usernamesignup" class="personel-name">نام</label>
+        @Html.TextBoxFor(m => m.Name, new { placeholder = "Name" })
+    </p>
+    <p>
+        <label for="usernamesignup" class="uname" data-icon="">نام کاربری</label>
+        @Html.TextBoxFor(m => m.UserName, new { placeholder = "User name" })
+    </p>
+
+    <p>
+        <label for="passwordsignup" class="youpasswd" data-icon="">کلمه عبور</label>
+        @Html.PasswordFor(m => m.Password, new { placeholder = "Password" })
+    </p>
+    <p>
+        <label for="passwordsignup_confirm" class="youpasswd" data-icon="">تایید کلمه عبور </label>
+        @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Confirm password" })
+    </p>
+    <p>
+        <div class="validation-error" style="display: none">
+            <h2>لطفا خطاها را تصحیح کنید</h2>
+            <ul id="register_errors"></ul>
+        </div>
+    </p>
+    <p class="signin button">
+        <input type="submit" value="تکمیل ثبت نام" />
+    </p>
+    <p class="change_link">
+
+        <a href="#tologin" class="to_register"> نام کاربری دارم </a>
+        <a  id="changeToRegisterByEmployee" class="to_register">ثبت نام بعنوان پرسنل سازمان</a>
+    </p>
+}
