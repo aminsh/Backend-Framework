@@ -58,7 +58,7 @@ namespace Core.Bus
 
             AppDomain.CurrentDomain.Load("EventHandlers");
 
-            var @event = ObjectExtention.Deseianlize(token["data"].ToString(), type).As<IReceiveEvent>();
+            var @event = ObjectExtention.Deserialize(token["data"].ToString(), type).As<IReceiveEvent>();
 
             var eventType = @event.GetType();
 

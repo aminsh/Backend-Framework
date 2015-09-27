@@ -20,12 +20,12 @@ namespace Utility
             return new JavaScriptSerializer().Serialize(source);
         }
 
-        public static T Deseianlize<T>(string message)
+        public static T Deserialize<T>(string message)
         {
             return new JavaScriptSerializer().Deserialize<T>(message);
         }
 
-        public static object Deseianlize(string message , Type type)
+        public static object Deserialize(string message , Type type)
         {
             return new JavaScriptSerializer().Deserialize(message, type);
         }

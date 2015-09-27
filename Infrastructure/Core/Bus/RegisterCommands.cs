@@ -2,7 +2,10 @@
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using Core.ApiResult;
 using Core.Command;
+using Core.Domain;
+using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json.Linq;
 using RabbitMQ.Client.Events;
 using Utility;
@@ -37,28 +40,58 @@ namespace Core.Bus
             {
                 var body = ea.Body;
                 var message = Encoding.UTF8.GetString(body);
-                Handle(message);
+                var commandMessage = CommnadMessage.Deserialize(message);
+
+                var validationResult = Validate(commandMessage);
+                if (validationResult.IsValid)
+                    Handle(commandMessage);
+                else
+                    ;//GlobalHost.ConnectionManager.GetHubContext("").Clients.User("")[""](new {});
             };
 
             channel.BasicConsume(queue: queueName, noAck: true, consumer: consumer);
         }
 
-        private static void Handle(string message)
+        private static IValidationResult Validate(CommnadMessage message)
         {
-            var token = JObject.Parse(message);
-            var typeName = token["CommandName"].ToString();
-            var current = ObjectExtention.Deseianlize<CurrentForBus>(token["Current"].ToString());
-            
-            AppDomain.CurrentDomain.Load("Commands");
-            var type =
-                AppDomain.CurrentDomain.GetAssemblies()
-                    .First(a => a.GetName().Name == "Commands")
-                    .GetTypes()
-                    .First(t => t.Name == typeName);
+            AppDomain.CurrentDomain.Load("CommandValidation");
+            var commandType = message.Command.GetType();
+
+            var commnadValidationType = AppDomain.CurrentDomain.GetAssemblies()
+                .Where(a => a.GetName().Name == "CommandValidation")
+                .SelectMany(a => a.GetTypes())
+                .SingleOrDefault(t => t.GetInterfaces().Any(ifc =>
+                    ifc.IsGenericType &&
+                    ifc.GetGenericTypeDefinition() == typeof(ICommandValidator<>) &&
+                    ifc.GetGenericArguments().First() == commandType));
+
+            if (commnadValidationType == null)
+                return new ValidationResult();
+
+            var validatorMethod =
+                commnadValidationType.GetMethods()
+                    .Single(m =>
+                        m.Name == "Validate" &&
+                        m.GetParameters().First().ParameterType == commandType);
+
+            var arguments =
+                commnadValidationType.GetConstructors()[0].GetParameters()
+                    .Select(p => DependencyManager.Resolve(p.ParameterType)).ToArray();
+
+            var instance = Activator.CreateInstance(commnadValidationType, arguments);
+            commnadValidationType.GetProperty("Current").SetValue(instance, message.Current);
+
+            validatorMethod.Invoke(instance, new object[] { message.Command });
+
+            return instance.As<DomainValidator>().ValidationResult;
+        }
+
+        private static void Handle(CommnadMessage message)
+        {
+            var command = message.Command;
+            var current = message.Current;
 
             AppDomain.CurrentDomain.Load("CommandHandlers");
-
-            var command = ObjectExtention.Deseianlize(token["Command"].ToString(), type).As<ICommand>();
 
             var commandType = command.GetType();
 
@@ -85,6 +118,5 @@ namespace Core.Bus
 
             handleMethod.Invoke(instance, new object[] { command });
         }
-
     }
 }

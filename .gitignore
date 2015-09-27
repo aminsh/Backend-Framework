@@ -3,6 +3,7 @@ packages
 *.dll
 *.pdb
 *.cache
+*.suo
 /bin
 
 [Dd]ebug/
@@ -14,3 +15,4 @@ build/
 
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
+

@@ -14,7 +14,7 @@ namespace Presentation.Controllers
 
             //Session["category"] = category;
             //Session["reportName"] = reportName;
-            //Session["parameters"] = parameters  == null ? null : ObjectExtention.Deseianlize<IEnumerable<Parameter>>(parameters);
+            //Session["parameters"] = parameters  == null ? null : ObjectExtention.Deserialize<IEnumerable<Parameter>>(parameters);
            
             return View();
         }
