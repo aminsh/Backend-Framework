@@ -4,7 +4,7 @@ using Core.DataAccess;
 using Core.Domain;
 using Domain;
 
-namespace DomainValidation
+namespace CommandValidation
 {
     public class EmployeeValidator : DomainValidator,
         ICommandValidator<CreateEmployeeCommand>
