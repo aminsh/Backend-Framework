@@ -27,23 +27,5 @@ namespace Core.Bus
                 }
             }    
         }
-
-        public IHubConnectionContext<dynamic> HubContext<THub>() where THub : Hub
-        {
-            return GlobalHost.ConnectionManager.GetHubContext<THub>().Clients;
-        }
-
-        
-        public void SendToClient<TEvent>(TEvent @event) where TEvent : B2CEvent
-        {
-            //GlobalHost.ConnectionManager.GetHubContext<EmployeeHub>().Clients.All.EmployeeCreatedEvent(@event);
-
-            //GlobalHost.ConnectionManager.GetHubContext("EmployeeHub").Clients.User("").
-            //var hubConnection = new HubConnection("http://localhost:2737/");
-            //var proxy = hubConnection.CreateHubProxy(@event.HubName);
-            //hubConnection.Start().Wait();
-
-            //proxy.Invoke(@event.GetType().Name, @event);
-        }
     }
 }
