@@ -20,14 +20,14 @@ namespace Core.Bus
 
             var commandTypes = AppDomain.CurrentDomain.GetAssemblies()
                 .First(a => a.GetName().Name == "Commands")
-                .GetTypes().Where(t => t.GetInterfaces().Any(its => its == typeof(ICommand)));
+                .GetTypes().Where(t => t.GetInterfaces().Any(its => its == typeof (ICommand)));
 
             commandTypes.ForEach(Subscribe);
         }
 
         private static void Subscribe(Type commandType)
         {
-            var commandName =  ConfigurationManager.AppSettings["ApplicationName"] + commandType.Name;
+            var commandName = ConfigurationManager.AppSettings["ApplicationName"] + commandType.Name;
             var channel = RabbitMqFactory.Channel;
 
             channel.ExchangeDeclare(exchange: commandName, type: "fanout");
@@ -44,9 +44,11 @@ namespace Core.Bus
 
                 var validationResult = Validate(commandMessage);
                 if (validationResult.IsValid)
+                {
                     Handle(commandMessage);
+                }
                 else
-                    ;//GlobalHost.ConnectionManager.GetHubContext("").Clients.User("")[""](new {});
+                    ; //GlobalHost.ConnectionManager.GetHubContext("").Clients.User("")[""](new {});
             };
 
             channel.BasicConsume(queue: queueName, noAck: true, consumer: consumer);
@@ -62,7 +64,7 @@ namespace Core.Bus
                 .SelectMany(a => a.GetTypes())
                 .SingleOrDefault(t => t.GetInterfaces().Any(ifc =>
                     ifc.IsGenericType &&
-                    ifc.GetGenericTypeDefinition() == typeof(ICommandValidator<>) &&
+                    ifc.GetGenericTypeDefinition() == typeof (ICommandValidator<>) &&
                     ifc.GetGenericArguments().First() == commandType));
 
             if (commnadValidationType == null)
@@ -81,12 +83,12 @@ namespace Core.Bus
             var instance = Activator.CreateInstance(commnadValidationType, arguments);
             commnadValidationType.GetProperty("Current").SetValue(instance, message.Current);
 
-            validatorMethod.Invoke(instance, new object[] { message.Command });
+            validatorMethod.Invoke(instance, new object[] {message.Command});
 
             return instance.As<DomainValidator>().ValidationResult;
         }
 
-        private static void Handle(CommnadMessage message)
+        private static object Handle(CommnadMessage message)
         {
             var command = message.Command;
             var current = message.Current;
@@ -100,7 +102,7 @@ namespace Core.Bus
                 .SelectMany(a => a.GetTypes())
                 .Single(t => t.GetInterfaces().Any(ifc =>
                     ifc.IsGenericType &&
-                    ifc.GetGenericTypeDefinition() == typeof(ICommandHandler<>) &&
+                    ifc.GetGenericTypeDefinition() == typeof (ICommandHandler<>) &&
                     ifc.GetGenericArguments().First() == commandType));
 
             var handleMethod =
@@ -116,7 +118,9 @@ namespace Core.Bus
 
             commnadHandlerType.GetProperty("Current").SetValue(instance, current);
 
-            handleMethod.Invoke(instance, new object[] { command });
+            handleMethod.Invoke(instance, new object[] {command});
+
+            return instance.As<DomainService>().ReturnValue;
         }
     }
 }

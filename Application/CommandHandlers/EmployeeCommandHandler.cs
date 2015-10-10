@@ -43,8 +43,7 @@ namespace CommandHandlers
             employee.FirstName = cmd.FirstName;
             employee.LastName = cmd.LastName;
 
-            if (ValidationResult.IsValid)
-                UnitOfWork.Commit();
+            ReturnValue = new {};
         }
 
         public void Handle(RemoveEmployeeCommand cmd)

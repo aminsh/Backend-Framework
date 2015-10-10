@@ -136,7 +136,6 @@
     <Compile Include="Domain\Contract\IRemovable.cs" />
     <Compile Include="Domain\Contract\IValueObject.cs" />
     <Compile Include="Domain\DomainValidator.cs" />
-    <Compile Include="Event\B2CEvent.cs" />
     <Compile Include="Bus\EventBus.cs" />
     <Compile Include="Event\IEvent.cs" />
     <Compile Include="Bus\IEventBus.cs" />
