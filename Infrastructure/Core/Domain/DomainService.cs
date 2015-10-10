@@ -11,6 +11,6 @@ namespace Core.Domain
         public IUnitOfWork UnitOfWork { get; set; }
         public IEventBus EventBus { get; set; }
         public ICurrent Current { get; set; }
-        protected IValidationResult ValidationResult { get; set; }
+        public object ReturnValue { get; set; }
     }
 }
