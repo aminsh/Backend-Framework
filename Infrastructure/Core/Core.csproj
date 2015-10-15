@@ -115,10 +115,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiResult\Error.cs" />
-    <Compile Include="ApiResult\IResult.cs" />
-    <Compile Include="ApiResult\IValidationResult.cs" />
-    <Compile Include="ApiResult\Result.cs" />
+    <Compile Include="Api\ApiControllerBase.cs" />
+    <Compile Include="Api\Error.cs" />
+    <Compile Include="Api\IResult.cs" />
+    <Compile Include="Api\IValidationResult.cs" />
+    <Compile Include="Api\OKCommandResult.cs" />
+    <Compile Include="Api\OKQueryResult.cs" />
+    <Compile Include="Api\Result.cs" />
     <Compile Include="Bus\RabbitMQCommandBus.cs" />
     <Compile Include="Bus\CommnadMessage.cs" />
     <Compile Include="Bus\CurrentForBus.cs" />
@@ -152,7 +155,8 @@
     <Compile Include="IOC\DependencyManager.cs" />
     <Compile Include="IOC\UnityResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ApiResult\ValidationResult.cs" />
+    <Compile Include="Api\ValidationResult.cs" />
+    <Compile Include="Query\IReadStorage.cs" />
     <Compile Include="Query\ReadStorage.cs" />
     <Compile Include="SingnalR\CommandHub.cs" />
   </ItemGroup>

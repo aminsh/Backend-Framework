@@ -2,6 +2,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Presentation.App_Start;
 using AuthorizeAttribute = System.Web.Http.AuthorizeAttribute;
 
 namespace Presentation

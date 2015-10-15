@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.Api;
 using Core.ApiResult;
 using Core.Bus;
 using Core.Command;
@@ -25,15 +26,7 @@ namespace Presentation
             container.RegisterType<ICommandBus, RabbitMQCommandBus>();
             container.RegisterType<IEventBus, EventBus>();
             container.RegisterType<ICurrent, Current>(new PerThreadLifetimeManager());
-
-            //DependencyManager.Register<IUnitOfWork, EntityFrameworkUnitOfWork>(Lifetime.PerRequest);
-            
-            //DependencyManager.Register<IValidationResult, ValidationResult>(Lifetime.PerRequest);
-
-            //DependencyManager.Register<ICurrent, FakeCurrent>(Lifetime.PerRequest);
-
-            //DependencyManager.Register<ReportData, ReportData>(Lifetime.Singletone);
-
+            container.RegisterType<IResult, Result>(new PerThreadLifetimeManager());
 
             container.RegisterType(
                 typeof(IRepository<>),

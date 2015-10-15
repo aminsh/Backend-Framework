@@ -10,7 +10,7 @@ namespace Core.Bus
     public class EventBus : IEventBus
     {
      
-        public void SendToBussiness<TEvent>(TEvent @event) where TEvent : ISendEvent
+        public void SendToBusiness<TEvent>(TEvent @event) where TEvent : ISendEvent
         {
             var eventName = @event.GetType().Name;
             var message = new { eventName = eventName, data = @event.Serialize() }.Serialize();

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Web.Http;
+﻿using System.Web.Http;
 using Core.Bus;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
@@ -32,15 +30,12 @@ namespace Presentation.App_Start
                new CamelCasePropertyNamesContractResolver();
             config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
 
-            //config.Filters.Add(new AuthorizeAttribute());
+            config.Filters.Add(new AuthorizeAttribute());
             var container = IocConfig.Register();
             config.DependencyResolver = new IoCContainer(container);
 
             app.UseWebApi(config);
             app.MapSignalR();
-
-            RegisterCommands.Execute();
-            RegisterEvents.Execute();
         }
     }
 }

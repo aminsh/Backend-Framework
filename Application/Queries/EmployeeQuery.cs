@@ -1,25 +1,27 @@
-﻿using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using Core.DataAccess;
-using DataAccess;
-using Domain;
+﻿using System;
+using Core.Query;
 using Kendo.DynamicLinq;
 using ReadModels;
-using Utility;
 
 namespace Queries
 {
     public class EmployeeQuery
     {
-        public DataSourceResult All(DataSourceRequest request)
+        private readonly IReadStorage _readStorage;
+
+        public EmployeeQuery(IReadStorage readStorage)
         {
-          return null;
+            _readStorage = readStorage;
         }
 
-        public EmployeeSingleView ById(int id)
+        public DataSourceResult All(DataSourceRequest request)
         {
-           return null;
+            return _readStorage.Get<EmployeeListView>(request, "spName");
+        }
+
+        public EmployeeSingleView ById(Guid id)
+        {
+            return _readStorage.GetById<EmployeeSingleView>(id, "spName");
         }
     }
 }

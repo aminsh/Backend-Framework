@@ -1,4 +1,5 @@
 ﻿using Core.ApiResult;
+using Core.Bus;
 using Core.DataAccess;
 using Core.Domain.Contract;
 using Core.Event;

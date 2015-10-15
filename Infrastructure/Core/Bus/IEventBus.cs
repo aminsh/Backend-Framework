@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNet.SignalR;
-using Microsoft.AspNet.SignalR.Hubs;
+﻿using Core.Event;
 
-namespace Core.Event
+namespace Core.Bus
 {
     public interface IEventBus
     {
-        void SendToBussiness<TEvent>(TEvent @event) where TEvent : ISendEvent;
+        void SendToBusiness<TEvent>(TEvent @event) where TEvent : ISendEvent;
     }
 }

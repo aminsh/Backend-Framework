@@ -2,6 +2,7 @@
 using Core.ApiResult;
 using Core.Command;
 using Core.Domain.Contract;
+using Utility;
 
 namespace Core.Bus
 {
@@ -10,8 +11,8 @@ namespace Core.Bus
         public void Send<TCommand>(TCommand cmd) where TCommand : ICommand
         {
             var message = new CommnadMessage(
-                cmd, 
-                cmd.GetType().Name, 
+                cmd,
+                cmd.GetType().Name,
                 DependencyManager.Resolve<ICurrent>());
 
             var result = DependencyManager.Resolve<IResult>();
@@ -21,13 +22,13 @@ namespace Core.Bus
 
             if (validationResult.IsNotValid)
             {
-                result.ValidationResult = validationResult.ToDto();
+                result.ValidationResult = validationResult;
                 return;
             }
 
             var returnValue = DependencyManager.Resolve<ISendCommandToHandler>().Handle(message);
 
-            result.ValidationResult = new {isValid = true};
+            result.ValidationResult = new ValidationResult();
             result.ReturnValue = returnValue;
         }
     }

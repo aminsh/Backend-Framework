@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Utility
 {
@@ -19,7 +15,7 @@ namespace Utility
             _connection = new SqlConnection(connectionString);
         }
 
-        public DataSet RunProcedure(string storedProcedureName , IEnumerable<SqlParameter> parameters)
+        public DataSet RunProcedure(string storedProcedureName, IEnumerable<SqlParameter> parameters)
         {
             _connection.Open();
 
@@ -28,12 +24,9 @@ namespace Utility
                 CommandType = CommandType.StoredProcedure
             };
 
-            parameters.ForEach(param =>
-            {
-                command.Parameters.Add(param);
-            });
+            parameters.ForEach(param => command.Parameters.Add(param));
 
-            var da = new SqlDataAdapter { SelectCommand = command };
+            var da = new SqlDataAdapter {SelectCommand = command};
             var dataSet = new DataSet();
             da.Fill(dataSet);
             _connection.Close();

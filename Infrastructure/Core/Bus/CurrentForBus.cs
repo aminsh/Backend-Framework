@@ -10,7 +10,7 @@ namespace Core.Bus
     public class CurrentForBus : ICurrent
     {
         public Guid UserId { get; set; }
-        public int PeriodId { get; set; }
-        public int StockId { get; set; }
+        public Guid PeriodId { get; set; }
+        public Guid BranchId { get; set; }
     }
 }
