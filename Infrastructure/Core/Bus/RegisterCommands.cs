@@ -2,11 +2,9 @@
 using System.Configuration;
 using System.Linq;
 using System.Text;
-using Core.ApiResult;
 using Core.Command;
-using Core.Domain;
+using Core.SingnalR;
 using Microsoft.AspNet.SignalR;
-using Newtonsoft.Json.Linq;
 using RabbitMQ.Client.Events;
 using Utility;
 
@@ -42,85 +40,31 @@ namespace Core.Bus
                 var message = Encoding.UTF8.GetString(body);
                 var commandMessage = CommnadMessage.Deserialize(message);
 
-                var validationResult = Validate(commandMessage);
+                var validationResult = DependencyManager.Resolve<ISendCommandToValidator>().Validate(commandMessage);
                 if (validationResult.IsValid)
                 {
-                    Handle(commandMessage);
+                    var returnValue = DependencyManager.Resolve<ISendCommandToHandler>().Handle(commandMessage);
+
+                    GlobalHost.ConnectionManager.GetHubContext<CommandHub>()
+                        .Clients.User(commandMessage.Current.UserId.ToString()).CommittedCommand(new
+                        {
+                            command = new {id = commandMessage.Command.CommandId},
+                            returnValue = returnValue,
+                            validationResult = new {isValid = true}
+                        });
                 }
                 else
-                    ; //GlobalHost.ConnectionManager.GetHubContext("").Clients.User("")[""](new {});
+                {
+                    GlobalHost.ConnectionManager.GetHubContext<CommandHub>()
+                        .Clients.User(commandMessage.Current.UserId.ToString()).FailedCommand(new
+                        {
+                            command = new {id = commandMessage.Command.CommandId},
+                            validationResult = validationResult.ToDto()
+                        });
+                }
             };
 
             channel.BasicConsume(queue: queueName, noAck: true, consumer: consumer);
-        }
-
-        private static IValidationResult Validate(CommnadMessage message)
-        {
-            AppDomain.CurrentDomain.Load("CommandValidation");
-            var commandType = message.Command.GetType();
-
-            var commnadValidationType = AppDomain.CurrentDomain.GetAssemblies()
-                .Where(a => a.GetName().Name == "CommandValidation")
-                .SelectMany(a => a.GetTypes())
-                .SingleOrDefault(t => t.GetInterfaces().Any(ifc =>
-                    ifc.IsGenericType &&
-                    ifc.GetGenericTypeDefinition() == typeof (ICommandValidator<>) &&
-                    ifc.GetGenericArguments().First() == commandType));
-
-            if (commnadValidationType == null)
-                return new ValidationResult();
-
-            var validatorMethod =
-                commnadValidationType.GetMethods()
-                    .Single(m =>
-                        m.Name == "Validate" &&
-                        m.GetParameters().First().ParameterType == commandType);
-
-            var arguments =
-                commnadValidationType.GetConstructors()[0].GetParameters()
-                    .Select(p => DependencyManager.Resolve(p.ParameterType)).ToArray();
-
-            var instance = Activator.CreateInstance(commnadValidationType, arguments);
-            commnadValidationType.GetProperty("Current").SetValue(instance, message.Current);
-
-            validatorMethod.Invoke(instance, new object[] {message.Command});
-
-            return instance.As<DomainValidator>().ValidationResult;
-        }
-
-        private static object Handle(CommnadMessage message)
-        {
-            var command = message.Command;
-            var current = message.Current;
-
-            AppDomain.CurrentDomain.Load("CommandHandlers");
-
-            var commandType = command.GetType();
-
-            var commnadHandlerType = AppDomain.CurrentDomain.GetAssemblies()
-                .Where(a => a.GetName().Name == "CommandHandlers")
-                .SelectMany(a => a.GetTypes())
-                .Single(t => t.GetInterfaces().Any(ifc =>
-                    ifc.IsGenericType &&
-                    ifc.GetGenericTypeDefinition() == typeof (ICommandHandler<>) &&
-                    ifc.GetGenericArguments().First() == commandType));
-
-            var handleMethod =
-                commnadHandlerType.GetMethods()
-                    .Single(m =>
-                        m.Name == "Handle" &&
-                        m.GetParameters().First().ParameterType == commandType);
-            var arguments =
-                commnadHandlerType.GetConstructors()[0].GetParameters()
-                    .Select(p => DependencyManager.Resolve(p.ParameterType)).ToArray();
-
-            var instance = Activator.CreateInstance(commnadHandlerType, arguments);
-
-            commnadHandlerType.GetProperty("Current").SetValue(instance, current);
-
-            handleMethod.Invoke(instance, new object[] {command});
-
-            return instance.As<DomainService>().ReturnValue;
         }
     }
 }

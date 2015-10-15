@@ -7,7 +7,7 @@ using Utility;
 
 namespace Core.Bus
 {
-    public class CommandBus : ICommandBus
+    public class RabbitMQCommandBus : ICommandBus
     {
         public void Send<TCommand>(TCommand cmd) where TCommand : ICommand
         {

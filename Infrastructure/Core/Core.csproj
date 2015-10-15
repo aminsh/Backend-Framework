@@ -116,17 +116,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiResult\Error.cs" />
+    <Compile Include="ApiResult\IResult.cs" />
     <Compile Include="ApiResult\IValidationResult.cs" />
-    <Compile Include="Bus\CommandBus.cs" />
+    <Compile Include="ApiResult\Result.cs" />
+    <Compile Include="Bus\RabbitMQCommandBus.cs" />
     <Compile Include="Bus\CommnadMessage.cs" />
     <Compile Include="Bus\CurrentForBus.cs" />
     <Compile Include="Bus\RabbitMQFactory.cs" />
     <Compile Include="Bus\RegisterCommands.cs" />
     <Compile Include="Bus\RegisterEvents.cs" />
+    <Compile Include="Bus\WithoutMessageQueueCommandBus.cs" />
     <Compile Include="Command\ICommandValidator.cs" />
     <Compile Include="Command\ICommand.cs" />
     <Compile Include="Bus\ICommandBus.cs" />
     <Compile Include="Command\ICommandHandler.cs" />
+    <Compile Include="Command\ISendCommandToHandler.cs" />
+    <Compile Include="Command\ISendCommandToValidator.cs" />
+    <Compile Include="Command\SendCommandToHandler.cs" />
+    <Compile Include="Command\SendCommandToValidator.cs" />
     <Compile Include="DataAccess\IReadRepository.cs" />
     <Compile Include="DataAccess\IRepositoy.cs" />
     <Compile Include="DataAccess\IUnitOfWork.cs" />
@@ -147,6 +154,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ApiResult\ValidationResult.cs" />
     <Compile Include="Query\ReadStorage.cs" />
+    <Compile Include="SingnalR\CommandHub.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utility\Utility.csproj">

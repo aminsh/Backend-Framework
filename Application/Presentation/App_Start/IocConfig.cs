@@ -22,7 +22,7 @@ namespace Presentation
 
             container.RegisterType<IUnitOfWork, EntityFrameworkUnitOfWork>(new PerThreadLifetimeManager());
             container.RegisterType<IValidationResult, ValidationResult>();
-            container.RegisterType<ICommandBus, CommandBus>();
+            container.RegisterType<ICommandBus, RabbitMQCommandBus>();
             container.RegisterType<IEventBus, EventBus>();
             container.RegisterType<ICurrent, Current>(new PerThreadLifetimeManager());
 
