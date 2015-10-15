@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Dynamic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Kendo.DynamicLinq;
 using Utility;
 
 namespace Core.Query
 {
-    public static class ReadStorage
+    public class ReadStorage : IReadStorage
     {
-        public static DataSourceResult Get<T>(DataSourceRequest request, string storedProcedureName)
+        public DataSourceResult Get<T>(DataSourceRequest request, string storedProcedureName)
             where T : class, new()
         {
             return request.ToDataSourceResult<T>(storedProcedureName);
         }
 
-        public static T GetById<T>(object id, string storedProcedureName) where T : class, new()
+        public T GetById<T>(object id, string storedProcedureName) where T : class, new()
         {
             var parameters = new SqlParameter[]
             {
@@ -32,7 +28,7 @@ namespace Core.Query
             return ds.Tables[0].Rows[0].ToObject<T>();
         }
 
-        public static IEnumerable<T> Get<T>(Dictionary<string, object> param, string storedProcedureName)
+        public IEnumerable<T> Get<T>(Dictionary<string, object> param, string storedProcedureName)
             where T : class, new()
         {
             var parameters = param.Select(p => new SqlParameter(p.Key, p.Value)).ToList();
