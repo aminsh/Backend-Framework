@@ -3,10 +3,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using Core.DataAccess;
+using Core.Domain.Contract;
 
 namespace DataAccess
 {
-    public class EntityFrameworkRepository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class EntityFrameworkRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
     {
         private readonly DbContext _context;
 
@@ -14,6 +15,7 @@ namespace DataAccess
         {
             _context = context;
         }
+
         public void Add(TEntity entity)
         {
             _context.Set<TEntity>().Add(entity);

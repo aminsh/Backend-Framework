@@ -46,10 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppDbContext.cs" />
-    <Compile Include="EntityFrameworkReadRepository.cs" />
-    <Compile Include="EntityFrameworkRepository.cs" />
-    <Compile Include="EntityFrameworkUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

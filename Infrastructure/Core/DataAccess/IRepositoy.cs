@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using Core.Domain.Contract;
 
 namespace Core.DataAccess
 {
-    public interface IRepository<TEntity> 
+    public interface IRepository<TEntity> where TEntity : class ,IEntity
     {
         void Add(TEntity entity);
         void Modify(TEntity entity);

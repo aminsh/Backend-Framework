@@ -2,11 +2,11 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using Core.DataAccess;
+using Core.Domain.Contract;
 
-namespace DataAccess
+namespace Core.DataAccess
 {
-    public class EntityFrameworkReadRepository<TEntity> : IReadRepository<TEntity> where TEntity : class
+    public class EntityFrameworkReadRepository<TEntity> : IReadRepository<TEntity> where TEntity : class, IEntity
     {
         private readonly DbContext _context;
 

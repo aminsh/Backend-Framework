@@ -4,23 +4,18 @@ using System.Data.Entity.Migrations;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using Core.Domain.Contract;
-using Domain;
 using Utility;
 
-namespace DataAccess
+namespace Core.DataAccess
 {
-    public class AppDbContext : DbContext
+    public class CoreDbContext : DbContext
     {
-        public DbSet<User> Users{ get; set; }
-        
-       
-
-        static AppDbContext()
+        static CoreDbContext()
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AppDbContext, MigrationManager<AppDbContext>>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<CoreDbContext, MigrationManager<CoreDbContext>>());
         }
 
-        public AppDbContext()
+        public CoreDbContext()
             :base("dbConnection")
         { }
 
