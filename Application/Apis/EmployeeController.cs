@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Http;
 using Commands;
 using Core.Api;
@@ -30,7 +31,7 @@ namespace Apis
 
         [Route("{id}")]
         [HttpGet]
-        public IHttpActionResult GetById(int id)
+        public IHttpActionResult GetById(Guid id)
         {
             return OKQuery(_empployeeQuery.ById(id));
         }

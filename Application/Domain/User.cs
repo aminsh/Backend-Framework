@@ -1,8 +1,9 @@
 ﻿using System;
+using Core.Domain.Contract;
 
 namespace Domain
 {
-    public class User 
+    public class User : IEntity
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
