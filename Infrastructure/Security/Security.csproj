@@ -86,10 +86,6 @@
       <Project>{2E6B3A2C-D8CD-4791-9FA4-1F8F67E294E1}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
-      <Project>{95F644B7-AD38-4174-B1A8-BFDC0A023EB5}</Project>
-      <Name>DataAccess</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Utility\Utility.csproj">
       <Project>{dab31023-e1f1-4065-adb3-b76be514b99a}</Project>
       <Name>Utility</Name>

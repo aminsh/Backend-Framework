@@ -50,10 +50,6 @@
       <Project>{2e6b3a2c-d8cd-4791-9fa4-1f8f67e294e1}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Infrastructure\DataAccess\DataAccess.csproj">
-      <Project>{95f644b7-ad38-4174-b1a8-bfdc0a023eb5}</Project>
-      <Name>DataAccess</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{cf7967ac-d56b-439e-a238-34211026aaf0}</Project>
       <Name>Domain</Name>
