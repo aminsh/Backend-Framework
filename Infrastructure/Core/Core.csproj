@@ -151,6 +151,7 @@
     <Compile Include="Domain\Contract\IValueObject.cs" />
     <Compile Include="Domain\DomainValidator.cs" />
     <Compile Include="Bus\EventBus.cs" />
+    <Compile Include="Domain\EnumMetadata.cs" />
     <Compile Include="Event\IEvent.cs" />
     <Compile Include="Bus\IEventBus.cs" />
     <Compile Include="Event\IEventHandler.cs" />
