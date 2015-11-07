@@ -137,11 +137,9 @@
     <Compile Include="Command\ISendCommandToValidator.cs" />
     <Compile Include="Command\SendCommandToHandler.cs" />
     <Compile Include="Command\SendCommandToValidator.cs" />
-    <Compile Include="DataAccess\CoreDbContext.cs" />
-    <Compile Include="DataAccess\EntityFrameworkReadRepository.cs" />
+    <Compile Include="DataAccess\AppDbContext.cs" />
     <Compile Include="DataAccess\EntityFrameworkRepository.cs" />
     <Compile Include="DataAccess\EntityFrameworkUnitOfWork.cs" />
-    <Compile Include="DataAccess\IReadRepository.cs" />
     <Compile Include="DataAccess\IRepositoy.cs" />
     <Compile Include="DataAccess\IUnitOfWork.cs" />
     <Compile Include="Domain\DomainService.cs" />
@@ -162,6 +160,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Api\ValidationResult.cs" />
     <Compile Include="Query\IReadStorage.cs" />
+    <Compile Include="Query\ReadContext.cs" />
     <Compile Include="Query\ReadStorage.cs" />
     <Compile Include="SingnalR\CommandHub.cs" />
   </ItemGroup>

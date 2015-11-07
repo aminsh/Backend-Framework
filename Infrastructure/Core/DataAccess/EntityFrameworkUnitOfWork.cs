@@ -10,7 +10,7 @@ namespace DataAccess
 
         public EntityFrameworkUnitOfWork()
         {
-            _context = new CoreDbContext();
+            _context = new AppDbContext();
         }
 
         public void Commit()
@@ -21,11 +21,6 @@ namespace DataAccess
         public IRepository<TEntity> GetRepository<TEntity>() where TEntity : class, IEntity, new()
         {
             return new EntityFrameworkRepository<TEntity>(_context);
-        }
-
-        public IReadRepository<TEntity> GetReadRepository<TEntity>() where TEntity : class, IEntity, new()
-        {
-            return new EntityFrameworkReadRepository<TEntity>(_context);
         }
     }
 }

@@ -1,43 +1,24 @@
-﻿using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using Kendo.DynamicLinq;
-using Utility;
+﻿using System.Linq;
 
 namespace Core.Query
 {
     public class ReadStorage : IReadStorage
     {
-        public DataSourceResult Get<T>(DataSourceRequest request, string storedProcedureName)
-            where T : class, new()
+        private readonly ReadContext _context;
+
+        public ReadStorage(ReadContext context)
         {
-            return request.ToDataSourceResult<T>(storedProcedureName);
+            _context = context;
         }
 
-        public T GetById<T>(object id, string storedProcedureName) where T : class, new()
+        public IQueryable<TView> Get<TView>() where TView : class, new()
         {
-            var parameters = new SqlParameter[]
-            {
-                new SqlParameter("@intId", id),
-            };
-
-            var ds = new SqlHelper().RunProcedure(
-                storedProcedureName,
-                parameters);
-
-            return ds.Tables[0].Rows[0].ToObject<T>();
+            return _context.Set<TView>();
         }
 
-        public IEnumerable<T> Get<T>(Dictionary<string, object> param, string storedProcedureName)
-            where T : class, new()
+        public TView GetById<TView>(object id) where TView : class, new()
         {
-            var parameters = param.Select(p => new SqlParameter(p.Key, p.Value)).ToList();
-
-            var ds = new SqlHelper().RunProcedure(
-                storedProcedureName,
-                parameters);
-
-            return ds.Tables[0].ToList<T>();
+            return _context.Set<TView>().Find(id);
         }
     }
 }

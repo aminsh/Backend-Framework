@@ -16,12 +16,15 @@ namespace Queries
 
         public DataSourceResult All(DataSourceRequest request)
         {
-            return _readStorage.Get<EmployeeListView>(request, "spName");
+            //return _readStorage.Get<EmployeeListView>(request, "spName");
+
+            return null;
         }
 
-        public EmployeeSingleView ById(Guid id)
+        public object ById(Guid id)
         {
-            return _readStorage.GetById<EmployeeSingleView>(id, "spName");
+            //return _readStorage.GetById<EmployeeSingleView>(id, "spName");
+            return null;
         }
     }
 }

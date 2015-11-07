@@ -37,7 +37,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Infrastructure\U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandValidation", "Application\CommandValidation\CommandValidation.csproj", "{70754DA2-40D7-48D7-8352-8DA103B5FFEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "Application\DataAccess\DataAccess.csproj", "{5C7B6AEB-81F0-4FD9-BB7A-7E0D4DAAAC27}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessConfigurations", "Application\DataAccess\DataAccessConfigurations.csproj", "{5C7B6AEB-81F0-4FD9-BB7A-7E0D4DAAAC27}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Test", "Core.Test\Core.Test.csproj", "{40FEA0AA-CF16-4A69-8B93-56AE5E17565E}"
 EndProject

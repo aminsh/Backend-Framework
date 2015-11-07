@@ -9,13 +9,8 @@ namespace Core.Query
 {
     public interface IReadStorage
     {
-        DataSourceResult Get<T>(DataSourceRequest request, string storedProcedureName)
-            where T : class, new();
+        IQueryable<TView> Get<TView>() where TView : class, new();
 
-        T GetById<T>(object id, string storedProcedureName)
-            where T : class, new();
-
-        IEnumerable<T> Get<T>(Dictionary<string, object> param, string storedProcedureName)
-            where T : class, new();
+        TView GetById<TView>(object id) where TView : class, new();
     }
 }

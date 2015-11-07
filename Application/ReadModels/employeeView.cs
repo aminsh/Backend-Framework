@@ -1,14 +1,13 @@
-﻿namespace ReadModels
+namespace ReadModels
 {
-    public class EmployeeListView
-    {
-        public int Id { get; set; }
-        public string Title { get; set; }
-    }
+    using System;
+    using System.ComponentModel.DataAnnotations.Schema;
 
-    public class EmployeeSingleView
+    //[Table("EmployeeView")]
+    public class EmployeeView
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
+        public Guid Id { get; set; }
+
+        public string Name { get; set; }
     }
 }
