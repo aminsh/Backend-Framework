@@ -42,19 +42,6 @@ namespace Presentation
                     return repo;
                 }));
 
-            container.RegisterType(typeof(IReadRepository<>), typeof(EntityFrameworkReadRepository<>),
-                new InjectionFactory(
-                    (ctr, type, str) =>
-                    {
-                        var genericType = type.GenericTypeArguments[0];
-                        var repo = typeof(IUnitOfWork)
-                            .GetMethod("GetReadRepository")
-                            .MakeGenericMethod(genericType)
-                            .Invoke(container.Resolve<IUnitOfWork>(), new object[] { });
-
-                        return repo;
-                    }));
-
             return container;
         }
     }
