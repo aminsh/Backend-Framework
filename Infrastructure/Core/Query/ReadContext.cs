@@ -1,7 +1,7 @@
 using System;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration;
 using System.Linq;
-using Core.Domain.Contract;
 
 namespace Core.Query
 {
@@ -27,10 +27,13 @@ namespace Core.Query
                 .Where(type => type.IsClass)
                 .ToList();
 
-            var entityMethod = typeof(DbModelBuilder).GetMethod("Entity");
+            var entityMethod = typeof (DbModelBuilder).GetMethod("Entity");
 
             entityTypes.ForEach(type =>
-                entityMethod.MakeGenericMethod(type).Invoke(modelBuilder, new object[] { }));
+            {
+                dynamic entityConfiguratin = entityMethod.MakeGenericMethod(type).Invoke(modelBuilder, new object[] {});
+                entityConfiguratin.ToTable(type.Name);
+            });
         }
     }
 }
