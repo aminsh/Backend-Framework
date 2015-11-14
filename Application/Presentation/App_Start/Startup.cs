@@ -1,9 +1,6 @@
-﻿using System.Web.Http;
-using Core.Bus;
-using Microsoft.AspNet.Identity;
+﻿using Core.IOC;
+using Core.Owin;
 using Microsoft.Owin;
-using Microsoft.Owin.Security.Cookies;
-using Newtonsoft.Json.Serialization;
 using Owin;
 using Utility;
 
@@ -11,31 +8,15 @@ using Utility;
 
 namespace Presentation.App_Start
 {
-    public partial class Startup
+    public class Startup
     {
         public void Configuration(IAppBuilder app)
         {
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Account"),
-                CookieSecure = CookieSecureOption.SameAsRequest
-            });
+            IOCConfiguration.Register();
 
-            var config = new HttpConfiguration();
-
-            config.MapHttpAttributeRoutes();
-
-            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver =
-               new CamelCasePropertyNamesContractResolver();
-            config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
-
-            config.Filters.Add(new AuthorizeAttribute());
-            var container = IocConfig.Register();
-            config.DependencyResolver = new IoCContainer(container);
-
-            app.UseWebApi(config);
-            app.MapSignalR();
+            OwinConfiguration.Register(
+                app , 
+                new IoCContainer(DependencyManager.Container));
         }
     }
 }
