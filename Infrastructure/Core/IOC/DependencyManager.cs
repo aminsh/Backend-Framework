@@ -1,20 +1,52 @@
 ﻿using System;
+using Core.Api;
+using Core.ApiResult;
+using Core.Bus;
+using Core.Command;
+using Core.DataAccess;
+using Core.Provider;
+using DataAccess;
 using Microsoft.Practices.Unity;
 using Utility;
 
-namespace Core
+namespace Core.IOC
 {
     public static class DependencyManager
     {
         public static IUnityContainer Container { get; set; }
-        
-        
-        public static void Register<TFrom, TTo>(Lifetime lifetime) where TTo : TFrom
+
+        public static void Initialize()
+        {
+            Container = new UnityContainer();
+
+            Initialize<ICookieProvider, CookieProvider>(Lifetime.Singletone);
+            Initialize<IUnitOfWork, EntityFrameworkUnitOfWork>(Lifetime.PerRequest);
+            Initialize<IValidationResult, ValidationResult>(Lifetime.PerRequest);
+            Initialize<IResult, Result>(Lifetime.PerRequest);
+            //Initialize<ICommandBus, RabbitMQCommandBus>();
+            //Initialize<IEventBus, EventBus>();
+
+            Container.RegisterType(
+                typeof(IRepository<>),
+                typeof(EntityFrameworkRepository<>),
+                new InjectionFactory((ctr, type, str) =>
+                {
+                    var genericType = type.GenericTypeArguments[0];
+                    var repo = typeof(IUnitOfWork)
+                        .GetMethod("GetRepository")
+                        .MakeGenericMethod(genericType)
+                        .Invoke(Container.Resolve<IUnitOfWork>(), new object[] { });
+
+                    return repo;
+                }));
+        }
+
+        public static void Initialize<TFrom, TTo>(Lifetime lifetime) where TTo : TFrom
         {
             Container.RegisterType<TFrom, TTo>(GetLifetimeManager(lifetime));
         }
 
-        public static void Register(Type type, object instance, Lifetime lifetime)
+        public static void Initialize(Type type, object instance, Lifetime lifetime)
         {
             Container.RegisterInstance(type, instance, GetLifetimeManager(lifetime));
         }
@@ -29,7 +61,7 @@ namespace Core
             return Container.Resolve(type);
         }
 
-        private static LifetimeManager GetLifetimeManager(Lifetime lifetime)
+        public static LifetimeManager GetLifetimeManager(Lifetime lifetime)
         {
             if(lifetime == Lifetime.NewInstance)
                 return  new TransientLifetimeManager();
