@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Web;
 using Core.Domain.Contract;
-using Utility;
+using Core.IOC;
+using Core.Provider;
 
 namespace Presentation.App_Start
 {
@@ -9,17 +10,26 @@ namespace Presentation.App_Start
     {
         public Guid UserId
         {
-            get { return Guid.Parse(HttpContext.Current.User.Identity.Name); }
+            get
+            {
+                return Guid.Parse(HttpContext.Current.User.Identity.Name);
+            }
         }
 
         public Guid PeriodId
         {
-            get { return HttpContext.Current.GetOwinContext().Request.Cookies["period-id"].Convert<Guid>(); }
+            get
+            {
+                return Guid.Parse(DependencyManager.Resolve<ICookieProvider>().Get("period-id"));
+            }
         }
 
         public Guid BranchId
         {
-            get { return HttpContext.Current.GetOwinContext().Request.Cookies["branch-id"].Convert<Guid>(); }
+            get
+            {
+                return Guid.Parse(DependencyManager.Resolve<ICookieProvider>().Get("branch-id"));
+            }
         }
     }
 }

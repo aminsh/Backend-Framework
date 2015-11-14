@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Core;
 using Core.ApiResult;
+using Core.IOC;
 using Security.Services;
 
 namespace Presentation.Controllers
@@ -72,17 +73,22 @@ namespace Presentation.Controllers
         {
             if (ModelState.IsValid)
             {
-                DependencyManager.Resolve<UserService>()
-                  .RegisterByName(model.UserName, model.Password,model.Name);
+                DependencyManager.Resolve<UserService>().RegisterByName(model.UserName, model.Password,model.Name);
+
+                var validationResult = DependencyManager.Resolve<IValidationResult>();
+
+                if (validationResult.IsValid)
+                    return Json(new {success = true});
+
                 return Json(new
                 {
-                    success = true,
+                    success = false,
                     errors = new List<object>
                     {
                         new
                         {
                             propertyName = "",
-                            errors = (List<string>) DependencyManager.Resolve<IValidationResult>().Errors.Select(err => err.Message)
+                            errors = validationResult.Errors.Select(err => err.Message).ToList()
                         }
                     }
                 });

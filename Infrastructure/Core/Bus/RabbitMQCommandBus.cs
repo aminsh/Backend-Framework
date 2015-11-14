@@ -2,6 +2,7 @@
 using System.Text;
 using Core.Command;
 using Core.Domain.Contract;
+using Core.IOC;
 using RabbitMQ.Client;
 using Utility;
 

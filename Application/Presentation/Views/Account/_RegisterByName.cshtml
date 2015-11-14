@@ -5,7 +5,6 @@
     <h1> ثبت نام </h1>
 
     <ul class="info-register">
-        <li>نام و نام خانوادگی با توجه به سیستم ‍برسنلی می باشد</li>
         <li>نام کاربری را حتما از حروف لاتین استفاده کنید</li>
     </ul>
 
@@ -27,7 +26,7 @@
         @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Confirm password" })
     </p>
     <p>
-        <div class="validation-error" style="display: none">
+        <div class="register_validation-error" style="display: none">
             <h2>لطفا خطاها را تصحیح کنید</h2>
             <ul id="register_errors"></ul>
         </div>
@@ -36,8 +35,6 @@
         <input type="submit" value="تکمیل ثبت نام" />
     </p>
     <p class="change_link">
-
         <a href="#tologin" class="to_register"> نام کاربری دارم </a>
-        <a  id="changeToRegisterByEmployee" class="to_register">ثبت نام بعنوان پرسنل سازمان</a>
     </p>
 }

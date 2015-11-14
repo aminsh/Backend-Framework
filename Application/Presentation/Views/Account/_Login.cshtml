@@ -2,30 +2,31 @@
            
 
 
-@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.returnUrl }, FormMethod.Post, new { autocomplete = "on", id = "form_login" }))
+@using (Html.BeginForm("Login", "Account", new {ReturnUrl = ViewBag.returnUrl}, FormMethod.Post, new {autocomplete = "on", id = "form_login"}))
 {
-                                <h1>ورود به سیستم</h1>
-                                <p>
-                                    <label for="username" class="uname" data-icon=""> نام کاربری</label>
-                                    @Html.TextBoxFor(m => m.UserName, new { placeholder = "User name" })
-                                </p>
-                                <p>
-                                    <label for="password" class="youpasswd" data-icon=""> کلمه عبور </label>
-                                    @Html.PasswordFor(m=>m.Password, new {placeholder = "Password"})
-                                </p>
-                                <br>
+    <h1>ورود به سیستم</h1>
+    <p>
+        <label for="username" class="uname" data-icon=""> نام کاربری</label>
+        @Html.TextBoxFor(m => m.UserName, new {placeholder = "User name"})
+    </p>
+    <p>
+        <label for="password" class="youpasswd" data-icon=""> کلمه عبور </label>
+        @Html.PasswordFor(m => m.Password, new {placeholder = "Password"})
+    </p>
     <br>
-    <div class="validation-error" style="display: none">
+    <br>
+    <div class="login_validation-error" style="display: none">
         <h2>لطفا خطاها را تصحیح کنید</h2>
         <ul id="login_errors">
 
         </ul>
     </div>
     
-                                <p class="login button">
-                                    <input type="submit" value="ورود" />
-								</p>
-                                <p class="change_link">
-قیلا ثبت نام نکرده اید ؟									<a href="#toregister" class="to_register">ثبت نام</a>
-								</p>
-}
+    <p class="login button">
+        <input type="submit" value="ورود" />
+    </p>
+    <p class="change_link">
+        قیلا ثبت نام نکرده اید ؟									<a href="#toregister" class="to_register">ثبت نام</a>
+    </p>
+    }
+    

@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using Core.Command;
+using Core.IOC;
 using Core.SingnalR;
 using Microsoft.AspNet.SignalR;
 using RabbitMQ.Client.Events;

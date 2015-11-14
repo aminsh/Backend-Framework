@@ -6,7 +6,6 @@ using Core.Domain;
 using Core.Domain.Contract;
 using Core.Query;
 using DataAccess;
-using DataAccessConfigurations;
 using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ReadModels;

@@ -2,6 +2,7 @@
 using Core.ApiResult;
 using Core.Command;
 using Core.Domain.Contract;
+using Core.IOC;
 using Utility;
 
 namespace Core.Bus

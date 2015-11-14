@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Core.ApiResult;
 using Core.Bus;
 using Core.Domain;
+using Core.IOC;
 using Utility;
 
 namespace Core.Command

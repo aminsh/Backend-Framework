@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Core.Domain.Contract;
 
 namespace Domain
@@ -12,5 +13,7 @@ namespace Domain
         public string LastName { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        public byte[] RowVersion { get; set; }
     }
 }

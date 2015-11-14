@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using Core.Command;
 using Core.Event;
+using Core.IOC;
 using Newtonsoft.Json.Linq;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
