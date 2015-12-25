@@ -4,6 +4,8 @@ using System.Text;
 using Core.Command;
 using Core.Event;
 using Core.IOC;
+using DevStorm.Infrastructure.Utility;
+using Microsoft.Practices.ObjectBuilder2;
 using Newtonsoft.Json.Linq;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -15,13 +17,13 @@ namespace Core.Bus
     {
         public static void Execute()
         {
-            AppDomain.CurrentDomain.Load("Events");
+            AppDomain.CurrentDomain.Load(AssemblyNameList.Events);
 
             var eventTypes = AppDomain.CurrentDomain.GetAssemblies()
                 .First(a => a.GetName().Name == "Events")
                 .GetTypes().Where(t => t.GetInterfaces().Any(its => its == typeof(IReceiveEvent)));
 
-            eventTypes.ForEach(Subscribe);
+            EnumerableExtensions.ForEach(eventTypes, Subscribe);
         }
 
         private static void Subscribe(Type eventType)
@@ -50,14 +52,14 @@ namespace Core.Bus
             var token = JObject.Parse(message);
             var typeName = token["eventName"].ToString();
 
-            AppDomain.CurrentDomain.Load("Events");
+            AppDomain.CurrentDomain.Load(AssemblyNameList.Events);
             var type =
                 AppDomain.CurrentDomain.GetAssemblies()
-                    .First(a => a.GetName().Name == "Events")
+                    .First(a => a.GetName().Name == AssemblyNameList.Events)
                     .GetTypes()
                     .First(t => t.Name == typeName);
 
-            AppDomain.CurrentDomain.Load("EventHandlers");
+            AppDomain.CurrentDomain.Load(AssemblyNameList.Events);
 
             var @event = ObjectExtention.Deserialize(token["data"].ToString(), type).As<IReceiveEvent>();
 

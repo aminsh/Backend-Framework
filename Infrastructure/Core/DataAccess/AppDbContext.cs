@@ -64,10 +64,10 @@ namespace Core.DataAccess
 
         private static void LoadEntities(DbModelBuilder modelBuilder)
         {
-            AppDomain.CurrentDomain.Load("Domain");
+            AppDomain.CurrentDomain.Load(AssemblyNameList.Domain);
 
             var entityTypes = AppDomain.CurrentDomain.GetAssemblies()
-                .Single(assembly => assembly.GetName().Name == "Domain")
+                .Single(assembly => assembly.GetName().Name == AssemblyNameList.Domain)
                 .GetTypes()
                 .Where(type => type.GetInterfaces().Any(its => its == typeof (IEntity)))
                 .ToList();
@@ -80,10 +80,10 @@ namespace Core.DataAccess
 
         private static void SetConfiguration(DbModelBuilder modelBuilder)
         {
-            AppDomain.CurrentDomain.Load("DataAccessConfigurations");
+            AppDomain.CurrentDomain.Load(AssemblyNameList.Persentation);
 
             var entityTypes = AppDomain.CurrentDomain.GetAssemblies()
-                .Single(assembly => assembly.GetName().Name == "DataAccessConfigurations")
+                .Single(assembly => assembly.GetName().Name == AssemblyNameList.Persentation)
                 .GetTypes()
                 .Where(type =>
                     type.BaseType != null &&
@@ -105,10 +105,10 @@ namespace Core.DataAccess
 
         private static void IgnoreRemovableTypes(DbModelBuilder modelBuilder)
         {
-            AppDomain.CurrentDomain.Load("Domain");
+            AppDomain.CurrentDomain.Load(AssemblyNameList.Domain);
 
             var entityTypes = AppDomain.CurrentDomain.GetAssemblies()
-                .Single(assembly => assembly.GetName().Name == "Domain")
+                .Single(assembly => assembly.GetName().Name == AssemblyNameList.Domain)
                 .GetTypes()
                 .Where(type => type.GetInterfaces().Any(its => its == typeof (IRemovable)))
                 .ToList();

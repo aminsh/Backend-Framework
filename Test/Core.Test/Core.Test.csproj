@@ -62,26 +62,26 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Application\Domain\Domain.csproj">
-      <Project>{cf7967ac-d56b-439e-a238-34211026aaf0}</Project>
-      <Name>Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Application\ReadModels\ReadModels.csproj">
-      <Project>{BB01056D-956E-4C6F-B8CD-BEAFCC7B4571}</Project>
-      <Name>ReadModels</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Infrastructure\Core\Core.csproj">
-      <Project>{2e6b3a2c-d8cd-4791-9fa4-1f8f67e294e1}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Infrastructure\Utility\Utility.csproj">
-      <Project>{dab31023-e1f1-4065-adb3-b76be514b99a}</Project>
-      <Name>Utility</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application\DevStorm.Application.Domain\DevStorm.Application.Domain.csproj">
+      <Project>{CF7967AC-D56B-439E-A238-34211026AAF0}</Project>
+      <Name>DevStorm.Application.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Application\DevStorm.Application.ReadModels\DevStorm.Application.ReadModels.csproj">
+      <Project>{BB01056D-956E-4C6F-B8CD-BEAFCC7B4571}</Project>
+      <Name>DevStorm.Application.ReadModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\DevStorm.Infrastructure.Core\DevStorm.Infrastructure.Core.csproj">
+      <Project>{21db9068-0ccf-4887-a791-d2c3386c8081}</Project>
+      <Name>DevStorm.Infrastructure.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\DevStorm.Infrastructure.DataAccess\DevStorm.Infrastructure.DataAccess.csproj">
+      <Project>{7ada9d4a-3490-43e4-8744-99fc01ad78ce}</Project>
+      <Name>DevStorm.Infrastructure.DataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

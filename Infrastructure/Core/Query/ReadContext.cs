@@ -19,10 +19,10 @@ namespace Core.Query
 
         private static void LoadViewModels(DbModelBuilder modelBuilder)
         {
-            AppDomain.CurrentDomain.Load("ReadModels");
+            AppDomain.CurrentDomain.Load(AssemblyNameList.ReadModels);
 
             var entityTypes = AppDomain.CurrentDomain.GetAssemblies()
-                .Single(assembly => assembly.GetName().Name == "ReadModels")
+                .Single(assembly => assembly.GetName().Name == AssemblyNameList.ReadModels)
                 .GetTypes()
                 .Where(type => type.IsClass)
                 .ToList();

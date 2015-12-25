@@ -2,10 +2,12 @@
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using Core.ApiResult;
 using Core.Command;
 using Core.IOC;
 using Core.SingnalR;
 using Microsoft.AspNet.SignalR;
+using Microsoft.Practices.ObjectBuilder2;
 using RabbitMQ.Client.Events;
 using Utility;
 
@@ -15,7 +17,7 @@ namespace Core.Bus
     {
         public static void Execute()
         {
-            AppDomain.CurrentDomain.Load("Commands");
+            AppDomain.CurrentDomain.Load(AssemblyNameList.Commands);
 
             var commandTypes = AppDomain.CurrentDomain.GetAssemblies()
                 .First(a => a.GetName().Name == "Commands")
@@ -42,6 +44,7 @@ namespace Core.Bus
                 var commandMessage = CommnadMessage.Deserialize(message);
 
                 var validationResult = DependencyManager.Resolve<ISendCommandToValidator>().Validate(commandMessage);
+
                 if (validationResult.IsValid)
                 {
                     var returnValue = DependencyManager.Resolve<ISendCommandToHandler>().Handle(commandMessage);

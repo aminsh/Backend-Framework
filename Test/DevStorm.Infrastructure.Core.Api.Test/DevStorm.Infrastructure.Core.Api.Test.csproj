@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A829D406-A312-4936-A767-E92296BA3837}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DevStorm.Infrastructure.Core.Api.Test</RootNamespace>
+    <AssemblyName>DevStorm.Infrastructure.Core.Api.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <Compile Include="AssemblyTest.cs" />
+    <Compile Include="FakeCurrent.cs" />
+    <Compile Include="SentCommandTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application\DevStorm.Application.Apis\DevStorm.Application.Apis.csproj">
+      <Project>{d3294b21-0144-4820-80b1-524f8e34082f}</Project>
+      <Name>DevStorm.Application.Apis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Application\DevStorm.Application.Commands\DevStorm.Application.Commands.csproj">
+      <Project>{ceff7f17-1ee7-4c2c-9af4-5da972019f72}</Project>
+      <Name>DevStorm.Application.Commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Application\DevStorm.Application.Domain\DevStorm.Application.Domain.csproj">
+      <Project>{cf7967ac-d56b-439e-a238-34211026aaf0}</Project>
+      <Name>DevStorm.Application.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Application\DevStorm.Application.ReadModels\DevStorm.Application.ReadModels.csproj">
+      <Project>{bb01056d-956e-4c6f-b8cd-beafcc7b4571}</Project>
+      <Name>DevStorm.Application.ReadModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Application\DevStorm.Applocation.CommandHandlers\DevStorm.Application.CommandHandlers.csproj">
+      <Project>{3d026220-c11c-4d80-8880-f87eed78726c}</Project>
+      <Name>DevStorm.Application.CommandHandlers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Application\DevStorm.Applocation.CommandValidations\DevStorm.Applocation.CommandValidations.csproj">
+      <Project>{70754da2-40d7-48d7-8352-8da103b5ffeb}</Project>
+      <Name>DevStorm.Applocation.CommandValidations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\DevStorm.Infrastructure.Api\DevStorm.Infrastructure.Api.csproj">
+      <Project>{9c48dd23-ea3c-404e-8e91-752ff96393fb}</Project>
+      <Name>DevStorm.Infrastructure.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\DevStorm.Infrastructure.Core\DevStorm.Infrastructure.Core.csproj">
+      <Project>{21db9068-0ccf-4887-a791-d2c3386c8081}</Project>
+      <Name>DevStorm.Infrastructure.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\DevStorm.Infrastructure.CQRS\DevStorm.Infrastructure.CQRS.csproj">
+      <Project>{861fcbce-37a9-411c-864c-3ee46dc71052}</Project>
+      <Name>DevStorm.Infrastructure.CQRS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\DevStorm.Infrastructure.DataAccess\DevStorm.Infrastructure.DataAccess.csproj">
+      <Project>{7ada9d4a-3490-43e4-8744-99fc01ad78ce}</Project>
+      <Name>DevStorm.Infrastructure.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\DevStorm.Infrastructure.Security\DevStorm.Infrastructure.Security.csproj">
+      <Project>{1510ca0d-fa33-4e9c-b48b-f45acf0df188}</Project>
+      <Name>DevStorm.Infrastructure.Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\DevStorm.Infrastructure.Utility\DevStorm.Infrastructure.Utility.csproj">
+      <Project>{dab31023-e1f1-4065-adb3-b76be514b99a}</Project>
+      <Name>DevStorm.Infrastructure.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

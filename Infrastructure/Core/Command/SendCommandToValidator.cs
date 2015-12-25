@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.ApiResult;
+using DevStorm.Infrastructure.ApiResult;
 using Core.Bus;
 using Core.Domain;
 using Core.IOC;
@@ -15,11 +16,11 @@ namespace Core.Command
     {
         public IValidationResult Validate(CommnadMessage message)
         {
-            AppDomain.CurrentDomain.Load("CommandValidation");
+            AppDomain.CurrentDomain.Load(AssemblyNameList.CommandValidation);
             var commandType = message.Command.GetType();
 
             var commnadValidationType = AppDomain.CurrentDomain.GetAssemblies()
-                .Where(a => a.GetName().Name == "CommandValidation")
+                .Where(a => a.GetName().Name == AssemblyNameList.CommandValidation)
                 .SelectMany(a => a.GetTypes())
                 .SingleOrDefault(t => t.GetInterfaces().Any(ifc =>
                     ifc.IsGenericType &&

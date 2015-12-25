@@ -17,12 +17,12 @@ namespace Core.Command
             var command = message.Command;
             var current = message.Current;
 
-            AppDomain.CurrentDomain.Load("CommandHandlers");
+            AppDomain.CurrentDomain.Load(AssemblyNameList.CommandHandlers);
 
             var commandType = command.GetType();
 
             var commnadHandlerType = AppDomain.CurrentDomain.GetAssemblies()
-                .Where(a => a.GetName().Name == "CommandHandlers")
+                .Where(a => a.GetName().Name == AssemblyNameList.CommandHandlers)
                 .SelectMany(a => a.GetTypes())
                 .Single(t => t.GetInterfaces().Any(ifc =>
                     ifc.IsGenericType &&

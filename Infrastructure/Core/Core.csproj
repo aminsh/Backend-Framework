@@ -125,6 +125,7 @@
     <Compile Include="Api\OKCommandResult.cs" />
     <Compile Include="Api\OKQueryResult.cs" />
     <Compile Include="Api\Result.cs" />
+    <Compile Include="AssemblyNameList.cs" />
     <Compile Include="Bus\RabbitMQCommandBus.cs" />
     <Compile Include="Bus\CommnadMessage.cs" />
     <Compile Include="Bus\CurrentForBus.cs" />
@@ -170,16 +171,15 @@
     <Compile Include="SingnalR\CommandHub.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Utility\Utility.csproj">
-      <Project>{dab31023-e1f1-4065-adb3-b76be514b99a}</Project>
-      <Name>Utility</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DevStorm.Infrastructure.Utility\DevStorm.Infrastructure.Utility.csproj">
+      <Project>{DAB31023-E1F1-4065-ADB3-B76BE514B99A}</Project>
+      <Name>DevStorm.Infrastructure.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

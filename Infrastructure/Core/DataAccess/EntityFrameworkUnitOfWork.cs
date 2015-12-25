@@ -1,8 +1,8 @@
 ﻿using System.Data.Entity;
-using Core.DataAccess;
 using Core.Domain.Contract;
+using DataAccess;
 
-namespace DataAccess
+namespace Core.DataAccess
 {
     public class EntityFrameworkUnitOfWork : IUnitOfWork
     {

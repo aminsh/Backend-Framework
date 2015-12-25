@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Data.Entity.ModelConfiguration;
 using System.Linq;
-using Core.DataAccess;
-using Core.Domain;
-using Core.Domain.Contract;
-using Core.Query;
-using DataAccess;
-using Domain;
+using DevStorm.Application.Domain;
+using DevStorm.Application.ReadModels;
+using DevStorm.Infrastructure.Core.Domain;
+using DevStorm.Infrastructure.DataAccess;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ReadModels;
 
 namespace Core.Test
 {

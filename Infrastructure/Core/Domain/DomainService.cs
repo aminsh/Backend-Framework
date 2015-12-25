@@ -1,9 +1,6 @@
-﻿using Core.ApiResult;
-using Core.Bus;
+﻿using Core.Bus;
 using Core.DataAccess;
 using Core.Domain.Contract;
-using Core.Event;
-using Utility;
 
 namespace Core.Domain
 {

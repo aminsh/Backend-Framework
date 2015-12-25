@@ -208,11 +208,11 @@
       <Project>{2e6b3a2c-d8cd-4791-9fa4-1f8f67e294e1}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Infrastructure\Security\Security.csproj">
+    <ProjectReference Include="..\..\Infrastructure\DevStorm.Infrastructure.Security\DevStorm.Infrastructure.Security.csproj">
       <Project>{1510ca0d-fa33-4e9c-b48b-f45acf0df188}</Project>
       <Name>Security</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Infrastructure\Utility\Utility.csproj">
+    <ProjectReference Include="..\..\Infrastructure\DevStorm.Infrastructure.Utility\DevStorm.Infrastructure.Utility.csproj">
       <Project>{dab31023-e1f1-4065-adb3-b76be514b99a}</Project>
       <Name>Utility</Name>
     </ProjectReference>
@@ -220,7 +220,7 @@
       <Project>{40fea0aa-cf16-4a69-8b93-56ae5e17565e}</Project>
       <Name>Core.Test</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Apis\Apis.csproj">
+    <ProjectReference Include="..\DevStorm.Application.Apis\DevStorm.Application.Apis.csproj">
       <Project>{d3294b21-0144-4820-80b1-524f8e34082f}</Project>
       <Name>Apis</Name>
     </ProjectReference>
@@ -228,7 +228,7 @@
       <Project>{3d026220-c11c-4d80-8880-f87eed78726c}</Project>
       <Name>CommandHandlers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Commands\Commands.csproj">
+    <ProjectReference Include="..\DevStorm.Application.Commands\DevStorm.Application.Commands.csproj">
       <Project>{ceff7f17-1ee7-4c2c-9af4-5da972019f72}</Project>
       <Name>Commands</Name>
     </ProjectReference>
@@ -240,7 +240,7 @@
       <Project>{5c7b6aeb-81f0-4fd9-bb7a-7e0d4daaac27}</Project>
       <Name>DataAccessConfigurations</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Domain\Domain.csproj">
+    <ProjectReference Include="..\DevStorm.Application.Domain\DevStorm.Application.Domain.csproj">
       <Project>{cf7967ac-d56b-439e-a238-34211026aaf0}</Project>
       <Name>Domain</Name>
     </ProjectReference>
@@ -256,11 +256,11 @@
       <Project>{46b4fefc-8063-4b4d-8127-ef7009ff9dc5}</Project>
       <Name>Hubs</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Queries\Queries.csproj">
+    <ProjectReference Include="..\DevStorm.Application.Queries\DevStorm.Application.Queries.csproj">
       <Project>{59d2cc02-d8ee-4ec1-9fda-8c18de3f96ba}</Project>
       <Name>Queries</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ReadModels\ReadModels.csproj">
+    <ProjectReference Include="..\DevStorm.Application.ReadModels\DevStorm.Application.ReadModels.csproj">
       <Project>{bb01056d-956e-4c6f-b8cd-beafcc7b4571}</Project>
       <Name>ReadModels</Name>
     </ProjectReference>

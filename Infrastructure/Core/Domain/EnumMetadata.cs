@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
+using DevStorm.Infrastructure.Utility;
 using Utility;
 
 namespace Core.Domain
@@ -39,10 +40,10 @@ namespace Core.Domain
 
         private static IEnumerable<Type> GetAllEnums()
         {
-            AppDomain.CurrentDomain.Load("Domain");
+            AppDomain.CurrentDomain.Load(AssemblyNameList.Domain);
 
             return AppDomain.CurrentDomain.GetAssemblies()
-                .Where(a => a.GetName().Name == "Domain")
+                .Where(a => a.GetName().Name == AssemblyNameList.Domain)
                 .SelectMany(assembly => assembly.GetTypes())
                 .Where(type => type.BaseType != null && type.BaseType == typeof (Enum))
                 .ToList();

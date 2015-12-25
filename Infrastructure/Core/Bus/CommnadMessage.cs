@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Command;
 using Core.Domain.Contract;
+using DevStorm.Infrastructure.Utility;
 using Newtonsoft.Json.Linq;
 using Utility;
 
@@ -29,7 +30,7 @@ namespace Core.Bus
             var typeName = token["CommandName"].ToString();
             var current = ObjectExtention.Deserialize<CurrentForBus>(token["Current"].ToString());
 
-            AppDomain.CurrentDomain.Load("Commands");
+            AppDomain.CurrentDomain.Load(AssemblyNameList.Commands);
             var type =
                 AppDomain.CurrentDomain.GetAssemblies()
                     .First(a => a.GetName().Name == "Commands")
